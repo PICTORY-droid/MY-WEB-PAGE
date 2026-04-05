@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PICTORY – Sweet Classics</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Noto+Sans+KR:wght@300;400;500&family=Lato:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green-dark:  #4a6741;
+      --green-mid:   #6b8f5e;
+      --green-light: #c8dbb8;
+      --green-pale:  #e8f0e0;
+      --green-bg:    #a8c494;
+      --cream:       #f9f7f2;
+      --text-main:   #3a3a3a;
+      --text-sub:    #666;
+      --border:      #d8e4cc;
+    }
+
+    body {
+      background: var(--cream);
+      font-family: 'Noto Sans KR', 'Lato', sans-serif;
+      color: var(--text-main);
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 0 60px;
+    }
+
+    /* ── HEADER ── */
+    .site-header {
+      padding: 22px 28px 18px;
+      border-bottom: 2px solid var(--green-dark);
+    }
+    .site-header .logo {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      font-size: 22px;
+      color: var(--green-dark);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    /* ── HERO BANNER ── */
+    .hero {
+      margin: 32px 28px 0;
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+      height: 240px;
+      background: url('/mnt/user-data/uploads/앨범커버_이미지.jpg') center/cover no-repeat;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg,
+        rgba(255,255,255,0.55) 0%,
+        rgba(255,255,255,0.25) 50%,
+        rgba(200,219,184,0.30) 100%);
+    }
+    .hero-text {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+      font-weight: 600;
+      color: var(--green-dark);
+      letter-spacing: 1px;
+      text-shadow: 0 1px 4px rgba(255,255,255,0.6);
+    }
+    .hero-subtitle {
+      font-size: 14px;
+      color: var(--green-dark);
+      letter-spacing: 1px;
+      font-weight: 400;
+    }
+
+    /* ── SECTION SPACING ── */
+    .section { margin: 32px 28px 0; }
+
+    /* ── PROFILE CARD ── */
+    .profile-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px 24px;
+      background: #fff;
+    }
+    .profile-card .profile-name {
+      font-size: 13px;
+      color: var(--text-main);
+      margin-bottom: 10px;
+      font-weight: 400;
+    }
+    .profile-card .core-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+    .profile-card ul {
+      list-style: disc;
+      padding-left: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .profile-card ul li {
+      font-size: 13px;
+      color: var(--text-sub);
+      line-height: 1.6;
+    }
+    .profile-card ul li strong {
+      color: var(--text-main);
+      font-weight: 500;
+    }
+
+    /* ── ALBUM ROW ── */
+    .album-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .album-thumb {
+      width: 90px;
+      height: 90px;
+      border-radius: 4px;
+      object-fit: cover;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
+    .album-thumb-svg {
+      width: 90px;
+      height: 90px;
+      border-radius: 4px;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+      overflow: hidden;
+    }
+    .album-info { flex: 1; }
+    .album-badge {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--green-dark);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+    .album-title-big {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-weight: 600;
+      color: var(--green-dark);
+      line-height: 1.2;
+    }
+    .album-by {
+      font-size: 13px;
+      color: var(--text-sub);
+      margin-bottom: 8px;
+    }
+    .album-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      font-size: 13px;
+      color: var(--text-main);
+    }
+    .album-meta span { display: flex; gap: 8px; }
+    .album-meta .label { color: var(--text-sub); min-width: 36px; }
+
+    /* ── QUOTE ── */
+    .quote-box {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #fff;
+      padding: 18px 22px;
+      font-size: 13px;
+      color: var(--text-sub);
+      line-height: 1.9;
+    }
+    .quote-box::before { content: '"'; }
+    .quote-box::after  { content: '"'; }
+
+    /* ── TRACKLIST ── */
+    .tracklist-wrap {
+      display: flex;
+      gap: 0;
+      position: relative;
+    }
+    .tracklist-label {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-main);
+      margin-bottom: 14px;
+      letter-spacing: 0.5px;
+    }
+    .tracklist-inner {
+      flex: 1;
+    }
+    .tracks-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 32px;
+    }
+    .track-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 13px;
+      color: var(--text-sub);
+      line-height: 1.5;
+    }
+    .track-item::before {
+      content: '•';
+      color: var(--green-mid);
+      font-size: 16px;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .track-title-badge {
+      font-size: 10px;
+      color: var(--green-dark);
+      border: 1px solid var(--green-dark);
+      border-radius: 3px;
+      padding: 0 4px;
+      margin-left: 4px;
+      vertical-align: middle;
+    }
+
+    /* decorative green blob behind tracklist */
+    .tracklist-section {
+      position: relative;
+      margin: 32px 0 0;
+    }
+    .blob-bg {
+      position: absolute;
+      right: -28px;
+      bottom: -28px;
+      width: 380px;
+      height: 380px;
+      border-radius: 50%;
+      background: var(--green-bg);
+      opacity: 0.35;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .tracklist-content {
+      position: relative;
+      z-index: 1;
+      padding: 0 28px 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="logo">PICTORY</div>
+  </header>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-text">
+      <div class="hero-title">Sweet Classics</div>
+      <div class="hero-subtitle">기분좋은 감성 클래식 플레이리스트</div>
+    </div>
+  </div>
+
+  <!-- PROFILE CARD -->
+  <div class="section">
+    <div class="profile-card">
+      <p class="profile-name">PICTORYGenerative Artist &amp; New Age Piano Musician</p>
+      <p class="core-label">[Core Expertise]</p>
+      <ul>
+        <li><strong>뉴에이지 피아노 작곡:</strong> 가사 없이도 서사가 느껴지는 감성적인 피아노 독주곡 제작</li>
+        <li><strong>사운드 마스터링:</strong> 연주곡 특유의 섬세한 터치와 공간감을 살리는 정교한 후반 작업</li>
+        <li><strong>디지털 사운드 디자인:</strong> 생성형 AI 기술을 활용한 맑고 투명한 피아노 음색 설계</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ALBUM ROW -->
+  <div class="section">
+    <div class="album-row">
+      <!-- Album thumbnail – using the uploaded cover image -->
+      <img
+        class="album-thumb"
+        src="/mnt/user-data/uploads/앨범커버_이미지.jpg"
+        alt="Sweet Classics Album Cover"
+        onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+      />
+      <!-- SVG fallback thumbnail -->
+      <div class="album-thumb-svg" style="display:none;">
+        <svg viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
+          <rect width="90" height="90" fill="#d4e6c3"/>
+          <text x="45" y="30" text-anchor="middle" font-family="'Playfair Display',serif" font-size="8" fill="#4a6741">Sweet</text>
+          <text x="45" y="42" text-anchor="middle" font-family="'Playfair Display',serif" font-size="8" fill="#4a6741">Classics</text>
+          <text x="45" y="60" text-anchor="middle" font-family="serif" font-size="18" fill="#6b8f5e">♪</text>
+        </svg>
+      </div>
+
+      <div class="album-info">
+        <div class="album-badge">New Album</div>
+        <div class="album-title-big">Sweet Classics</div>
+        <div class="album-by">by PICTORY</div>
+        <div class="album-meta">
+          <span><span class="label">장르</span> 클래식</span>
+          <span><span class="label">트랙</span> 24곡</span>
+          <span><span class="label">발매일</span> 2025.11.28</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUOTE -->
+  <div class="section">
+    <div class="quote-box">
+      Sweet Classics은 커피 한 잔의 향기처럼 가볍고, 아침 햇살처럼 긍정적인 감성을 담고 있습니다. 출근길, 산책길, 혹은 여유로운 오후의 순간에 여러분의 마음을 어루만지는 힐링의 시간이 되길 바랍니다.
+    </div>
+  </div>
+
+  <!-- TRACKLIST -->
+  <div class="tracklist-section">
+    <div class="blob-bg"></div>
+    <div class="tracklist-content">
+      <div class="tracklist-label">트랙리스트</div>
+      <div class="tracks-grid">
+        <div class="track-item">발은 걸음 (Title)<span class="track-title-badge">Title</span></div>
+        <div class="track-item">속삭임</div>
+        <div class="track-item">빛의 메아리</div>
+        <div class="track-item">아침 햇살</div>
+        <div class="track-item">평온함</div>
+        <div class="track-item">희망의 기운</div>
+        <div class="track-item">스며드는 기쁨</div>
+        <div class="track-item">새로운 발걸음</div>
+        <div class="track-item">새로운 여정</div>
+        <div class="track-item">부드러운 새벽</div>
+        <div class="track-item">잔잔한 바람</div>
+        <div class="track-item">부드러운 미소</div>
+        <div class="track-item">하늘의 메아리</div>
+        <div class="track-item">새로운 하늘</div>
+        <div class="track-item">구름의 노래</div>
+        <div class="track-item">산들바람</div>
+        <div class="track-item">구름의 속삭임</div>
+        <div class="track-item">스며드는 햇살</div>
+        <div class="track-item">그리움</div>
+        <div class="track-item">스치는 바람</div>
+        <div class="track-item">잔잔한 행복</div>
+        <div class="track-item">너의 피어남</div>
+        <div class="track-item">마음의 여운</div>
+        <div class="track-item">소소한 기쁨</div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
